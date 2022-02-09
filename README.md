@@ -41,9 +41,7 @@ public interface Prototype {
 	public Prototype doClone();
 
 }
-```
 
-```java
 public class Person implements Prototype {
 
 	String name;
@@ -61,9 +59,7 @@ public class Person implements Prototype {
 		return "This person is named " + name;
 	}
 }
-```
 
-```java
 public class Dog implements Prototype {
 
 	String sound;
@@ -81,4 +77,24 @@ public class Dog implements Prototype {
 		return "This dog says " + sound;
 	}
 }
+
+public class Demo {
+
+	public static void main(String[] args) {
+
+		Person person1 = new Person("Fred");
+		System.out.println("person 1:" + person1);
+		Person person2 = (Person) person1.doClone();
+		System.out.println("person 2:" + person2);
+
+		Dog dog1 = new Dog("Wooof!");
+		System.out.println("dog 1:" + dog1);
+		Dog dog2 = (Dog) dog1.doClone();
+		System.out.println("dog 2:" + dog2);
+
+	}
+
+}
 ```
+
+
