@@ -35,18 +35,18 @@ Three category
 > Create a class with private constructor and have a refrence of class object in static refrence of same class.
 > How we get that static object when we have private construtor,obviusly by a static method getInstance()
 
+### Singleton Pattern (Eager initialization)
+> do it fast !! :beer:
+
 ```java
 public class SingletonExample {
 
-	private static SingletonExample singletonExample = null;
+	private static SingletonExample singletonExample = new SingletonExample();
 
 	private SingletonExample() {
 	}
 
-	public static SingletonExample getInstance() {
-		if (singletonExample == null) {
-			singletonExample = new SingletonExample();
-		}
+	public static SingletonExample getInstance() {		
 		return singletonExample;
 	}
 
@@ -66,6 +66,78 @@ public class Demo {
 }
 ```
 
+### Singleton Pattern (Static block initialization)
+> Eager initialization you are doing ,have you think about exception? :angry:
+
+> Static block initialization implementation is similar to eager initialization, except that instance of class is created in the static block that provides option for exception handling.
+
+```java
+public class StaticBlockSingleton {
+
+    private static StaticBlockSingleton instance;
+    
+    private StaticBlockSingleton(){}
+    
+    //static block initialization for exception handling
+    static{
+        try{
+            instance = new StaticBlockSingleton();
+        }catch(Exception e){
+            throw new RuntimeException("Exception occured in creating singleton instance");
+        }
+    }
+    
+    public static StaticBlockSingleton getInstance(){
+        return instance;
+    }
+}
+
+```
+
+### Singleton Pattern (Lazy Initialization)
+> do it lazy :tired_face:
+
+```java
+public class LazyInitializedSingleton {
+
+    private static LazyInitializedSingleton instance;
+    
+    private LazyInitializedSingleton(){}
+    
+    public static LazyInitializedSingleton getInstance(){
+        if(instance == null){
+            instance = new LazyInitializedSingleton();
+        }
+        return instance;
+    }
+}
+
+```
+
+### Singleton Pattern (Thread Safe Singleton)
+> How about multithreading above all break ,do it in thread safe manner :lock:
+
+```java
+public class ThreadSafeSingleton {
+
+    private static ThreadSafeSingleton instance;
+    
+    private ThreadSafeSingleton(){}
+    
+    public static synchronized ThreadSafeSingleton getInstance(){
+        if(instance == null){
+            instance = new ThreadSafeSingleton();
+        }
+        return instance;
+    }
+    
+}
+
+```
+
+> Singleton pattern is used for logging, drivers objects, caching and thread pool.
+> Singleton design pattern is also used in other design patterns like Abstract Factory, Builder, Prototype, Facade etc.
+> Singleton design pattern is used in core java classes also, for example java.lang.Runtime, java.awt.Desktop.
 
 ## Prototype Pattern
 
@@ -78,6 +150,7 @@ public class Demo {
 
 > Create an interface of type Prototype which return Prototype and implement with various class like Person & Dog .
 > in doClone method return new Object of same type
+
 
 ```java
 public interface Prototype {
