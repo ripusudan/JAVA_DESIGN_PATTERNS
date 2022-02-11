@@ -132,8 +132,28 @@ public class ThreadSafeSingleton {
     }
     
 }
-
 ```
+> thread-safety is done what about performance due to cost associated with the synchronized method.
+
+> although we need it only for the first few threads who might create the separate instances.
+
+> To avoid this extra overhead every time, double checked locking principle is used. 
+
+> In this approach, the synchronized block is used inside the if condition with an additional check to ensure that only one instance of a singleton class is created.
+
+```java
+public static ThreadSafeSingleton getInstanceUsingDoubleLocking(){
+    if(instance == null){
+        synchronized (ThreadSafeSingleton.class) {
+            if(instance == null){
+                instance = new ThreadSafeSingleton();
+            }
+        }
+    }
+    return instance;
+}
+```
+
 
 > Singleton pattern is used for logging, drivers objects, caching and thread pool.
 > Singleton design pattern is also used in other design patterns like Abstract Factory, Builder, Prototype, Facade etc.
