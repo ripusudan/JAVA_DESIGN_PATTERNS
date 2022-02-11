@@ -22,6 +22,50 @@ Three category
 4. Builder Pattern
 5. Prototype Pattern
 
+## Singleton Pattern
+
+`Single class object does tons of work with only one instance`
+
+* As only one object is restriction hence singleton is a class is instantiated only once.
+* Put that single object refrence in class itself  by creating a static field in the class.
+* A static method exists on the class to obtain the instance of the class and is typically named something such as getInstance(). 
+* The singleton class typically has a private constructor to prevent the singleton class from being instantiated via a constructor.
+* Rather, the instance of the singleton is obtained via the static getInstance() method.
+
+> Create a class with private constructor and have a refrence of class object in static refrence of same class.
+> How we get that static object when we have private construtor,obviusly by a static method getInstance()
+
+```java
+public class SingletonExample {
+
+	private static SingletonExample singletonExample = null;
+
+	private SingletonExample() {
+	}
+
+	public static SingletonExample getInstance() {
+		if (singletonExample == null) {
+			singletonExample = new SingletonExample();
+		}
+		return singletonExample;
+	}
+
+	public void sayHello() {
+		System.out.println("Hello");
+	}
+}
+
+public class Demo {
+
+	public static void main(String[] args) {
+		SingletonExample singletonExample = SingletonExample.getInstance();
+
+		singletonExample.sayHello();
+	}
+
+}
+```
+
 
 ## Prototype Pattern
 
